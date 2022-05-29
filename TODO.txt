@@ -1,2 +1,2 @@
-(A) Figure out way to build examples
 (B) C# library
+(C) ADD -O https://www.rapidtables.com/code/linux/gcc/gcc-o.html

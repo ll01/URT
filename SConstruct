@@ -11,7 +11,9 @@ if env['CC'] == 'cl':
 else:
     # assuming useing gcc
     CCFLAGS = ["-DUSE_EIGEN -fopenmp"]
-SharedLibrary(
+Library(
     'urt', Glob('src/*.cpp'), CPPPATH=env['CPPPATH'], CCFLAGS=CCFLAGS)
 
-# Program(Glob('examples/*.cpp'), CPPPATH=env['CPPPATH'], CCFLAGS=CCFLAGS, LIBS=['urt'], LIBPATH='.')
+for file in Glob('examples/*.cpp'):
+    Program(file, CPPPATH=env['CPPPATH'],
+            CCFLAGS=CCFLAGS, LIBS=['urt'], LIBPATH='.')
