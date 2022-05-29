@@ -10,7 +10,7 @@ if env['CC'] == 'cl':
     CCFLAGS = ["/openmp", "/DUSE_EIGEN"]
 else:
     # assuming useing gcc
-    CCFLAGS = ["-DUSE_EIGEN -fopenmp"]
+    CCFLAGS = ["-DUSE_EIGEN -fopenmp -Ofast"]
 Library(
     'urt', Glob('src/*.cpp'), CPPPATH=env['CPPPATH'], CCFLAGS=CCFLAGS)
 
