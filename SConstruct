@@ -3,31 +3,32 @@ conan = SConscript('SConscript_conan')
 env.MergeFlags(conan['conan'])
 
 # ADD -O https://www.rapidtables.com/code/linux/gcc/gcc-o.html
-CCFLAGS = []
+
 
 if env['CC'] == 'cl':
-    CCFLAGS = ["/openmp", "/DUSE_EIGEN"]
+    env.Append(CCFLAGS = ["/openmp", "/DUSE_EIGEN"])
 else:
-    # assuming using gcc
-    CCFLAGS = ["-DUSE_EIGEN -fopenmp -Ofast"]
+    # assuming using gcc or clang 
+     env.Append(CCFLAGS = ["-DUSE_EIGEN -fopenmp -O3"])
 
 if ARGUMENTS.get('debug', 0):
     if env['CC'] == 'cl':
-        CCFLAGS.extend(['/Zi', '/EHsc', '/DEBUG'])
+        env['CCFLAGS'].extend(['/Zi', '/EHsc', '/DEBUG'])
         symbolsSavePath = ARGUMENTS.get('symbols', '')
+        env.append(LINKFLAGS = ['/DEBUG'])
         if symbolsSavePath:
-            CCFLAGS.append(f'/Fd{symbolsSavePath}/')
+            env['CCFLAGS'].append(f'/Fd{symbolsSavePath}/')
     else:
-        CCFLAGS.append('-g')
+        env['CCFLAGS'].append('-g')
 
 Library(
-    'urt', Glob('src/*.cpp'), CPPPATH=env['CPPPATH'], CCFLAGS=CCFLAGS)
+    'urt', Glob('src/*.cpp'), CPPPATH=env['CPPPATH'], CCFLAGS=env['CCFLAGS'])
 
 
 def compile_program(path):
     Program(
-        path, CPPPATH=env['CPPPATH'], CCFLAGS=CCFLAGS, LIBS=['urt'],
-        LIBPATH='.', LINKFLAGS=['/Zi', '/EHsc', '/DEBUG'])
+        path, CPPPATH=env['CPPPATH'], CCFLAGS=env['CCFLAGS'], LIBS=['urt'],
+        LIBPATH='.', LINKFLAGS=env['LINKFLAGS'])
 
 
 target = ARGUMENTS.get('target')
