@@ -20,7 +20,7 @@ int main()
    urt::WriteToCSV("./URT/data/y.csv", y);
    urt::WriteToCSV("./URT/data/x.csv", x);
 
-   // running OLS regression
+   // running OLS xregression
    urt::OLS<double> fit(y, x, true);
 
    // outputting regression results

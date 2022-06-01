@@ -1,3 +1,8 @@
-(A) Get debug tasks working
+
 (B) C# library
 (C) ADD -O https://www.rapidtables.com/code/linux/gcc/gcc-o.html
+(D) update read me
+
+ "~/.conan/data/**",
+"C:/.conan/**"
+need to be added to the inclue path on c_cpp properties

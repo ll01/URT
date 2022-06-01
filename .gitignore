@@ -1,0 +1,16 @@
+.sconsign.dblite
+conan.lock
+conanbuildinfo.txt
+conaninfo.txt
+graph_info.json
+SConscript_conan
+*.obj
+*.exe
+*.dll
+*.lib
+*.pdb
+**.ilk
+.vscode/c_cpp_properties.json
+.vscode/configurationCache.log
+.vscode/dryrun.log
+.vscode/targets.log
