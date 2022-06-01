@@ -1,7 +1,8 @@
 
-(B) C# library
-(C) ADD -O https://www.rapidtables.com/code/linux/gcc/gcc-o.html
-(D) update read me
+(A) C# library
+(B) ADD -O https://www.rapidtables.com/code/linux/gcc/gcc-o.html for msvc
+(C) update read me
+(D) make work for mac os
 
  "~/.conan/data/**",
 "C:/.conan/**"

@@ -1,7 +1,8 @@
+import platform
 env = Environment()
 conan = SConscript('SConscript_conan')
 env.MergeFlags(conan['conan'])
-
+env['SYSTEM'] = platform.system().lower()
 # ADD -O https://www.rapidtables.com/code/linux/gcc/gcc-o.html
 
 
@@ -9,7 +10,12 @@ if env['CC'] == 'cl':
     env.Append(CCFLAGS = ["/openmp", "/DUSE_EIGEN"])
 else:
     # assuming using gcc or clang 
-     env.Append(CCFLAGS = ["-DUSE_EIGEN -fopenmp -O3"])
+     env.Append(CCFLAGS = ['-DUSE_EIGEN', '-Ofast'])
+
+if 'linux' in env['SYSTEM']:
+    env['CCFLAGS'].Append('-fopenmp')
+elif 'darwin' in env['SYSTEM']:
+    print("working on getting openmp working on macos")
 
 if ARGUMENTS.get('debug', 0):
     if env['CC'] == 'cl':
