@@ -1,0 +1,34 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_import", "cc_library")
+load("//:windows_dll_library.bzl", "windows_dll_library")
+
+cc_library(
+    name = "URT",
+    srcs = glob(["src/*.cpp"]),
+    hdrs = glob(["include/*.hpp"]),
+    visibility = ["//examples:__pkg__"],
+    deps = [
+        "@eigen//:eigen",
+        "@boost//:boost",
+        ],
+    copts = ["-DUSE_EIGEN", ],
+)
+
+
+filegroup(
+    name = "srcs",
+    srcs = glob(["**"]),
+    visibility = ["//examples:__pkg__"],
+)
+
+
+windows_dll_library(
+    name = "killmelib",
+    srcs = glob(["src/*.cpp"]),
+    hdrs = glob(["include/*.hpp"]),
+    # visibility = ["//examples:__pkg__"],
+    deps = [
+        "@eigen//:eigen",
+        "@boost//:boost",
+        ],
+    copts = ["-DUSE_EIGEN", "/DCOMPILING_DLL"],
+)
