@@ -14,3 +14,6 @@ SConscript_conan
 .vscode/configurationCache.log
 .vscode/dryrun.log
 .vscode/targets.log
+bazel-*
+deps/*
+!deps/conanfile.txt
